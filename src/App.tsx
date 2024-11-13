@@ -9,7 +9,7 @@ function App() {
   const { signOut } = useAuthenticator();
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
   //获取输入的内容
-  const inputElement = document.querySelector('send_input') as HTMLInputElement;
+  const inputElement = document.getElementById("myInput") as HTMLInputElement;
 
   useEffect(() => {
     client.models.Todo.observeQuery().subscribe({
@@ -43,7 +43,7 @@ function App() {
           Review next step of this tutorial.
         </a>
       </div>
-      <input type="text" id="send_input" placeholder="input something"/>
+      <input type="text" id="myInput" placeholder="input something"/>
       <button onClick={createTodo}>Send</button>
       <button onClick={signOut}>Sign out</button>
     </main>
