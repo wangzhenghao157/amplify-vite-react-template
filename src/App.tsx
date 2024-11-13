@@ -26,7 +26,6 @@ function App() {
   return (
     <main>
       <h1>My todos</h1>
-      <button onClick={signOut}>Sign out</button>
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
@@ -41,6 +40,7 @@ function App() {
           Review next step of this tutorial.
         </a>
       </div>
+      <button onClick={signOut}>Sign out</button>
     </main>
   );
 }
