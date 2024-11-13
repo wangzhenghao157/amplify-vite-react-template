@@ -20,7 +20,7 @@ function App() {
   function createTodo() {
     const inputValue = inputElement.value;
     // client.models.Todo.create({ content: window.prompt("Todo content") });
-    client.models.Todo.create({ content: inputValue });
+    client.models.Todo.create({ content: inputValue ,isDone: false,name:"null_undefind"});
   }
     
   function deleteTodo(id: string) {
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <main>
-      <h1>All Messages</h1>
+      <h1>Chat Room </h1>
       <ul>
         {todos.map((todo) => (
           <li  onClick={() => deleteTodo(todo.id)} 
