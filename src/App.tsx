@@ -43,8 +43,8 @@ function App() {
           Review next step of this tutorial.
         </a>
       </div>
-      <input type="text" id="send_message" />
-      <button onClick={createTodo}>+ new</button>
+      <input type="text" id="send_input" placeholder="input something"/>
+      <button onClick={createTodo}>Send</button>
       <button onClick={signOut}>Sign out</button>
     </main>
   );
