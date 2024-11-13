@@ -8,6 +8,8 @@ const client = generateClient<Schema>();
 function App() {
   const { signOut } = useAuthenticator();
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  //获取输入的内容
+  const inputElement = document.querySelector('send_input') as HTMLInputElement;
 
   useEffect(() => {
     client.models.Todo.observeQuery().subscribe({
@@ -16,7 +18,9 @@ function App() {
   }, []);
 
   function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
+    const inputValue = inputElement.value;
+    // client.models.Todo.create({ content: window.prompt("Todo content") });
+    client.models.Todo.create({ content: inputValue });
   }
     
   function deleteTodo(id: string) {
@@ -39,6 +43,7 @@ function App() {
           Review next step of this tutorial.
         </a>
       </div>
+      <input type="text" id="send_message" />
       <button onClick={createTodo}>+ new</button>
       <button onClick={signOut}>Sign out</button>
     </main>
