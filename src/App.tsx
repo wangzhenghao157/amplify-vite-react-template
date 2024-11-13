@@ -25,12 +25,11 @@ function App() {
 
   return (
     <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
+      <h1>All Messages</h1>
       <ul>
         {todos.map((todo) => (
           <li  onClick={() => deleteTodo(todo.id)} 
-          key={todo.id}>{todo.content}</li>
+          key={todo.id}>{todo.content}<br/>{todo.createdAt}</li>
         ))}
       </ul>
       <div>
@@ -40,6 +39,7 @@ function App() {
           Review next step of this tutorial.
         </a>
       </div>
+      <button onClick={createTodo}>+ new</button>
       <button onClick={signOut}>Sign out</button>
     </main>
   );
