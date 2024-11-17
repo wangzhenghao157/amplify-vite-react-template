@@ -25,7 +25,7 @@ function App() {
 
     function sendMessage() {
         if (inputValue.trim()) {
-            client.models.Todo.create({ content: senderEmail ,email:senderEmail,userName:userN});
+            client.models.Todo.create({ content: inputValue.trim() ,email:senderEmail,userName:userN});
             setInputValue(""); // 清空输入框
         }
     }
@@ -64,8 +64,6 @@ function App() {
                 display: 'flex', flexDirection: 'column', gap: '10px',
             }}>
                 {messages.map((message) => {
-                    // 获取todo的email
-                    message.email = message.email? message.email:"no-email"
                     //比较是否是当前用户
                     console.log(message)
                     console.log(senderEmail)
@@ -76,7 +74,7 @@ function App() {
                     console.log(user.username)
                     console.log(message.email ==user?.signInDetails?.loginId )
                     console.log(message.userName ==user.username)
-                    console.log(user?.signInDetails?.loginId +"---"+ user.username)
+                    console.log("-------------------")
                     const isCurrentUser = (message.email == (user?.signInDetails?.loginId || user.username));
                     return (
                         <div key={message.id} style={{
