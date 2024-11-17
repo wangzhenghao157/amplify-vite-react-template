@@ -63,7 +63,7 @@ function App() {
             }}>
                 {messages.map((message) => {
                     // 判断是否为当前用户发送的消息
-                    const isCurrentUser = message.email === (user?.signInDetails?.loginId || user.username);
+                    const isCurrentUser = (message.email == (user?.signInDetails?.loginId || user.username));
                     console.log(isCurrentUser)
                     return (
                         <div key={message.id} style={{
@@ -88,7 +88,6 @@ function App() {
                                 padding: '12px 16px',
                                 backgroundColor: isCurrentUser ? '#8e44ad' : '#ecf0f1', // 当前用户为紫色，其他用户为灰色
                                 color: isCurrentUser ? '#fff' : '#2c3e50',
-                                borderRadius: isCurrentUser ? '15px 0 15px 15px' : '0 15px 15px 15px', // 当前用户气泡右上角圆角
                                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                                 textAlign: 'left',
                                 wordBreak: 'break-word',
