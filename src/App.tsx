@@ -24,7 +24,8 @@ function App() {
     function sendMessage() {
         if (inputValue.trim()) {
             const senderEmail = user?.signInDetails?.loginId;
-            client.models.Todo.create({ content: ` ${inputValue.trim()}` ,email:`${senderEmail}:`});
+            const userN = user.username
+            client.models.Todo.create({ content: senderEmail ,email:senderEmail,userName:userN});
             setInputValue(""); // 清空输入框
         }
     }
@@ -66,8 +67,12 @@ function App() {
                     // 获取todo的email
                     message.email = message.email? message.email:"no-email"
                     //比较是否是当前用户
+                    console.log(message.email)
+                    console.log(message.userName)
+                    console.log(user?.signInDetails?.loginId )
+                    console.log(user.username)
                     console.log(message.email ==user?.signInDetails?.loginId )
-                    console.log(message.email ==user.username)
+                    console.log(message.userName ==user.username)
                     console.log(user?.signInDetails?.loginId +"---"+ user.username)
                     const isCurrentUser = (message.email == (user?.signInDetails?.loginId || user.username));
                     return (
@@ -77,7 +82,7 @@ function App() {
                             alignItems: 'center',
                             gap: '10px',
                         }}>
-                                <div style={{
+                            <div style={{
                                 maxWidth: '20%',
                                 padding: '12px 16px',
                                 backgroundColor: isCurrentUser ? '#8e44ad' : '#ecf0f1', // 当前用户为紫色，其他用户为灰色
