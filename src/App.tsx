@@ -7,6 +7,7 @@ const client = generateClient<Schema>();
 
 function App() {
     const { user, signOut } = useAuthenticator();
+    console.log(user?.signInDetails?.loginId || user.username)
     const [messages, setMessages] = useState<Array<Schema["Todo"]["type"]>>([]);
     const [inputValue, setInputValue] = useState<string>("");
 
@@ -63,7 +64,7 @@ function App() {
                 {messages.map((message) => {
                     // 判断是否为当前用户发送的消息
                     const isCurrentUser = message.email === (user?.signInDetails?.loginId || user.username);
-
+                    console.log(isCurrentUser)
                     return (
                         <div key={message.id} style={{
                             display: 'flex',
@@ -72,7 +73,7 @@ function App() {
                             gap: '10px',
                         }}>
                             {/* 用户头像 */}
-                            <img
+                            {/* <img
                                 src={isCurrentUser ? '/path/to/your-avatar.jpg' : '/path/to/other-avatar.jpg'}
                                 alt="avatar"
                                 style={{
@@ -81,7 +82,19 @@ function App() {
                                     borderRadius: '50%',
                                     boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
                                 }}
-                            />
+                            /> */}
+                                <div style={{
+                                maxWidth: '20%',
+                                padding: '12px 16px',
+                                backgroundColor: isCurrentUser ? '#8e44ad' : '#ecf0f1', // 当前用户为紫色，其他用户为灰色
+                                color: isCurrentUser ? '#fff' : '#2c3e50',
+                                borderRadius: isCurrentUser ? '15px 0 15px 15px' : '0 15px 15px 15px', // 当前用户气泡右上角圆角
+                                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                textAlign: 'left',
+                                wordBreak: 'break-word',
+                            }}>
+                                <p style={{ margin: 0 }}>{message.email}</p>
+                            </div>
                             {/* 消息气泡 */}
                             <div style={{
                                 maxWidth: '70%',
