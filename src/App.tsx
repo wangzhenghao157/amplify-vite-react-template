@@ -7,10 +7,12 @@ const client = generateClient<Schema>();
 
 function App() {
     const { user, signOut } = useAuthenticator();
-    console.log("user?.signInDetails?.loginId:"+user?.signInDetails?.loginId  )
-    console.log("user.username:"+user.username)
+    const senderEmail = user?.signInDetails?.loginId;
+    const userN = user.username
     const [messages, setMessages] = useState<Array<Schema["Todo"]["type"]>>([]);
     const [inputValue, setInputValue] = useState<string>("");
+    console.log(senderEmail+"--"+userN)
+    console.log("/////")
 
     useEffect(() => {
         const subscription = client.models.Todo.observeQuery().subscribe({
@@ -23,8 +25,6 @@ function App() {
 
     function sendMessage() {
         if (inputValue.trim()) {
-            const senderEmail = user?.signInDetails?.loginId;
-            const userN = user.username
             client.models.Todo.create({ content: senderEmail ,email:senderEmail,userName:userN});
             setInputValue(""); // 清空输入框
         }
@@ -67,6 +67,9 @@ function App() {
                     // 获取todo的email
                     message.email = message.email? message.email:"no-email"
                     //比较是否是当前用户
+                    console.log(message)
+                    console.log(senderEmail)
+                    console.log(userN)
                     console.log(message.email)
                     console.log(message.userName)
                     console.log(user?.signInDetails?.loginId )
