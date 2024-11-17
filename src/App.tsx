@@ -2,8 +2,25 @@ import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { useAuthenticator } from '@aws-amplify/ui-react';
+// import { Auth } from '@aws-amplify/auth';
+// import { Auth } from 'aws-amplify';
 
 const client = generateClient<Schema>();
+
+// async function getCurrentUserEmail() {
+//   try {
+//     const user = await Auth.currentAuthenticatedUser();
+//     const email = user.attributes.email; // 获取用户的邮箱
+//     console.log('User email:', email);
+//     return email;
+//   } catch (error) {
+//     console.error('Error fetching user email:', error);
+//     return null;
+//   }
+// }
+// getCurrentUserEmail()
+import * as Amplify from 'aws-amplify';
+console.log(Amplify);
 
 function App() {
   const { signOut } = useAuthenticator();
@@ -19,8 +36,8 @@ function App() {
 
   function createTodo() {
     const inputValue = inputElement.value;
-    // client.models.Todo.create({ content: window.prompt("Todo content") });
-    client.models.Todo.create({ content: inputValue ,isDone: false,name:"null_undefind"});
+    const userEmail = "获取到的email"
+    client.models.Todo.create({ content: inputValue ,email: userEmail});
   }
     
   function deleteTodo(id: string) {
