@@ -11,15 +11,12 @@ function App() {
     const userN = user.username
     const [messages, setMessages] = useState<Array<Schema["Todo"]["type"]>>([]);
     const [inputValue, setInputValue] = useState<string>("");
-    console.log(senderEmail+"--"+userN)
-    console.log("/////")
 
     useEffect(() => {
         const subscription = client.models.Todo.observeQuery().subscribe({
             next: (data) => setMessages([...data.items]),
             error: (err) => console.error("Error observing messages:", err),
         });
-
         return () => subscription.unsubscribe();
     }, []);
 
@@ -65,16 +62,6 @@ function App() {
             }}>
                 {messages.map((message) => {
                     //比较是否是当前用户
-                    console.log(message)
-                    console.log(senderEmail)
-                    console.log(userN)
-                    console.log(message.email)
-                    console.log(message.userName)
-                    console.log(user?.signInDetails?.loginId )
-                    console.log(user.username)
-                    console.log(message.email ==user?.signInDetails?.loginId )
-                    console.log(message.userName ==user.username)
-                    console.log("-------------------")
                     const isCurrentUser = (message.email == (user?.signInDetails?.loginId || user.username));
                     return (
                         <div key={message.id} style={{
