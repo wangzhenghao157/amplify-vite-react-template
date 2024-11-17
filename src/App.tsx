@@ -7,7 +7,8 @@ const client = generateClient<Schema>();
 
 function App() {
     const { user, signOut } = useAuthenticator();
-    console.log(user?.signInDetails?.loginId || user.username)
+    console.log("user?.signInDetails?.loginId:"+user?.signInDetails?.loginId  )
+    console.log("user.username:"+user.username)
     const [messages, setMessages] = useState<Array<Schema["Todo"]["type"]>>([]);
     const [inputValue, setInputValue] = useState<string>("");
 
@@ -62,9 +63,13 @@ function App() {
                 display: 'flex', flexDirection: 'column', gap: '10px',
             }}>
                 {messages.map((message) => {
-                    // 判断是否为当前用户发送的消息
+                    // 获取todo的email
+                    message.email = message.email? message.email:"no-email"
+                    //比较是否是当前用户
+                    console.log(message.email ==user?.signInDetails?.loginId )
+                    console.log(message.email ==user.username)
+                    console.log(user?.signInDetails?.loginId +"---"+ user.username)
                     const isCurrentUser = (message.email == (user?.signInDetails?.loginId || user.username));
-                    console.log(isCurrentUser)
                     return (
                         <div key={message.id} style={{
                             display: 'flex',
@@ -72,17 +77,6 @@ function App() {
                             alignItems: 'center',
                             gap: '10px',
                         }}>
-                            {/* 用户头像 */}
-                            {/* <img
-                                src={isCurrentUser ? '/path/to/your-avatar.jpg' : '/path/to/other-avatar.jpg'}
-                                alt="avatar"
-                                style={{
-                                    width: '40px',
-                                    height: '40px',
-                                    borderRadius: '50%',
-                                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-                                }}
-                            /> */}
                                 <div style={{
                                 maxWidth: '20%',
                                 padding: '12px 16px',
