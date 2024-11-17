@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { useAuthenticator } from '@aws-amplify/ui-react';
-// import { Auth } from '@aws-amplify/auth';
-// import { Auth } from 'aws-amplify';
+import { getCurrentUser } from 'aws-amplify/auth';
 
 const client = generateClient<Schema>();
 
@@ -19,8 +18,8 @@ const client = generateClient<Schema>();
 //   }
 // }
 // getCurrentUserEmail()
-import * as Amplify from 'aws-amplify';
-console.log(Amplify);
+
+console.log(getCurrentUser());
 
 function App() {
   const { signOut } = useAuthenticator();
@@ -50,7 +49,10 @@ function App() {
       <ul>
         {todos.map((todo) => (
           <li  onClick={() => deleteTodo(todo.id)} 
-          key={todo.id}>{todo.content}<br/>{todo.createdAt}</li>
+          key={todo.id}>{todo.content}<br/>
+          {todo.createdAt}<br/>
+          {todo.email}
+          </li>
         ))}
       </ul>
       <div>
